@@ -9,19 +9,27 @@
 
 
 void main() {
-  User bob = User("Bobby Fisher", 32);
+  User bob = User("Bob", 320.19);
+  User tod = User("Tod", 1234.98);
+  tod.display();
   bob.display();
-  bob.name = "Bob";
-  bob.display();
+  bob.buy(30);
+  print(tod.funds);
 }
 
 class User {
   String name;
-  int age;
+  double funds;
 
-  User(this.name, this.age);
+  User(this.name, this.funds);
 
   void display() {
-    print("User name: $name, User age: $age");
+    print("User name: $name, User funds: $funds");
+  }
+
+  buy(sum){
+    if (this.funds >= sum){
+      print("User $name have enough funds (>$sum) to complete the purchase.");
+    }
   }
 }
