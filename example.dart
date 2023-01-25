@@ -1,35 +1,48 @@
-// parent Class : User
-// Holds details about an user
-// Has a function to show user details
-//
-// Child Class : Bank
-// Stores details about the account balance
-// Stores details about the amount
-// Allows for deposits, withdraw, view balance
-
-
-void main() {
-  User bob = User("Bob", 320.19);
-  User tod = User("Tod", 1234.98);
-  tod.display();
-  bob.display();
-  bob.buy(30);
-  print(tod.funds);
-}
+import 'dart:io';
 
 class User {
   String name;
-  double funds;
+  int age;
+  User(this.name, this.age);
 
-  User(this.name, this.funds);
+  void display(){
+    print("User name: $name, age: $age");
+  }
+}
 
-  void display() {
-    print("User name: $name, User funds: $funds");
+class BankAccount extends User {
+  BankAccount(super.name, super.age);
+
+  double _balance = 0;
+  double get balance => _balance;
+
+  deposit(double amount) {
+    _balance += amount;
   }
 
-  buy(sum){
-    if (this.funds >= sum){
-      print("User $name have enough funds (>$sum) to complete the purchase.");
+  bool withdraw(double amount) {
+    if (amount <= _balance) {
+      _balance -= amount;
+      return true;
     }
+    return false;
   }
+
+  showBalance(){
+    print("Your balance: $balance");
+  }
+}
+
+void main() {
+  var account = BankAccount("Bob", 43);
+
+
+
+  account.deposit(114415.54);
+  print(account.balance);
+
+  account.display();
+  account.showBalance();
+  account.withdraw(4415.54);
+  account.showBalance();
 }
