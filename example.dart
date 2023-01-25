@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:args/args.dart';
 
 class User {
   String name;
@@ -35,8 +36,6 @@ class BankAccount extends User {
 
 void main() {
   var account = BankAccount("Bob", 43);
-
-
 
   account.deposit(114415.54);
   print(account.balance);
