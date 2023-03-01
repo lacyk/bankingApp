@@ -1,122 +1,93 @@
 import 'dart:io';
-import 'package:sqflite/sqflite.dart';
-import 'package:args/args.dart';
-import 'package:test/scaffolding.dart';
+import 'dart:async';
+import 'dart:convert';
+import './myLib.dart'; // importing logger();
 
-class User {
-  String name;
-  int age;
-  // int pass;
-  User(this.name, this.age);
-}
+main() async{
+  List<Customer> db = opener("./db.csv");
+  db.add(Customer("Legit", 1235.23, 5, 5555));
+  print(db);
+  final filename = 'test.csv';
 
-class BankAccount extends User {
-  BankAccount(super.name, super.age);
-  double _balance = 0;
-  double get balance => _balance;
-
-  deposit(double amount) {
-    _balance += amount;
-  }
-
-  bool withdraw(double amount) {
-    if (amount <= _balance) {
-      _balance -= amount;
-      return true;
-    } else {
-      print("You don't have enough money to withdraw");
-      return false;
-    }
-  }
-
-  showBalance(){
-    print("Your balance: $balance \n");
-  }
-}
-
-
-void main() {
-  var bob = BankAccount("Bob", 43);
-
-  Parser(bob);
-  // var a = userKey();
-  // print("User-Login is: $a");
-}
-
-void Menu() {
-  print(
-      "Choose the option below: \n"
-      "1. Create account \n"
-      "2. Deposit money on your bank account\n"
-      "3. Withdraw money from your bank account\n"
-      "4. Money transfer\n"
-      "5. Show balance\n"
-      "6. Exit \n"
+  // encode the list of objects as a JSON string
+  String json = jsonEncode(
+    db.map((person) => person.toMap()).toList(),
   );
+
+  // write the JSON string to a file
+  // File(filename).writeAsStringSync(json);
+
+  ////////
+
+  // read the JSON string from the file
+  String jsonIN = File(filename).readAsStringSync();
+
+  // decode the JSON string into a list of maps
+  List<dynamic> data = jsonDecode(jsonIN);
+
+  // convert the list of maps to a list of objects
+  List<Customer> people = data.map((map) => Customer.fromMap(map)).toList();
+
+  // print the list of objects
+  print(people);
 }
 
-String Function() userKey = (){
-  print("Enter your name: \n");
-  String input = stdin.readLineSync()!;
-  return input;
-};
+class Customer{
+  String name;
+  double amount;
+  int id;
+  int pass;
 
-Parser(obj){
-  Menu();
-    // while loop for continuous running switch
-    while (true) {
-      int input = int.parse(stdin.readLineSync()!);
-      switch (input) {
-        case 1:
-          {
-            print("number $input");
-          }
-          break;
-        case 2:
-          {
-            print("Type the amount of money to deposit: \n");
-            double input = double.parse(stdin.readLineSync()!);
-            obj.deposit(input);
-            obj.showBalance();
-          }
-          continue menu;
-        case 3:
-          {
-            print("Type the amount of money to withdraw: \n");
-            double input = double.parse(stdin.readLineSync()!);
-            obj.withdraw(input);
-            obj.showBalance();
-          }
-          continue menu;
-        case 4:
-          {
-            print("number $input");
-          }
-          break;
-        case 5:
-          {
-            obj.showBalance();
-          }
-          continue menu;
+  Customer(this.name, this.amount, this.id, this.pass);
 
-        case 6: {
-          return input;
-        }
+  Map<String, dynamic> toMap() {
+    return {
+      'name':   name,
+      'amount': amount,
+      'id':     id,
+      'pass':   pass,
+    };
+  }
 
-        menu: case 7:
-        {
-          Menu();
-        }
-        break;
-        default:
-        {
-          print("Something went wrong, try choosing the option again: \n");
-        }
-        continue menu;
-      }
-      // if user choose option 6 —> exit
-      if (input == 6){
-        break;
-      }
-    }
+  static Customer fromMap(Map<String, dynamic> map) {
+    return Customer(map['name'], map['amount'], map['id'], map['pass']);
+  }
+
+  @override
+  String toString(){
+    return "$name, $amount, $id";
+  }
+
+  void show(){
+    print('Name: $name, Amount: $amount, ID: $id, password: $pass');
+  }
+}
+
+int lastID(db){
+  Set<int> idList = db.map((item) => item.id).toSet();
+  int lastID = idList.reduce((a, b) => a > b ? a : b);
+  return lastID;
+}
+
+
+opener(path){
+  File file = File(path);
+  //whole content
+  String content = file.readAsStringSync();
+  // splitted content by new_line character
+  List<String> splitted = content.split("\n");
+  List<Customer> customers = [];
+  Set<int> idCollection = {};
+
+
+  for (String text in splitted){
+    String name = text.split(',')[0];
+    double amount = double.parse(text.split(',')[1]);
+    int id = int.parse(text.split(',')[2]);
+    int pass = int.parse(text.split(',')[3]);
+
+    customers.add(Customer(name, amount, id, pass));
+  }
+
+  return customers;
 }
