@@ -4,15 +4,14 @@ import 'dart:convert';
 import './myLib.dart'; // importing logger();
 
 main() async{
-  List<Customer> db = opener("./db.csv");
-  db.add(Customer("Legit", 1235.23, 5, 5555));
-  print(db);
+  // List<Customer> db = opener("./db.csv");
+  // db.add(Customer("Legit", 1235.23, 5, 5555));
   final filename = 'test.csv';
 
   // encode the list of objects as a JSON string
-  String json = jsonEncode(
-    db.map((person) => person.toMap()).toList(),
-  );
+  // String json = jsonEncode(
+  //   db.map((person) => person.toMap()).toList(),
+  // );
 
   // write the JSON string to a file
   // File(filename).writeAsStringSync(json);
@@ -29,7 +28,15 @@ main() async{
   List<Customer> people = data.map((map) => Customer.fromMap(map)).toList();
 
   // print the list of objects
+  people.add(Customer("Rory", 10000.12, 6, 6666));
   print(people);
+
+  String jsonOUT = jsonEncode(
+    people.map((person) => person.toMap()).toList(),
+  );
+
+  File(filename).writeAsStringSync(jsonOUT);
+  print(jsonOUT);
 }
 
 class Customer{
