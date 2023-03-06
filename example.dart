@@ -4,39 +4,22 @@ import 'dart:convert';
 import './myLib.dart'; // importing logger();
 
 main() async{
-  // List<Customer> db = opener("./db.csv");
-  // db.add(Customer("Legit", 1235.23, 5, 5555));
   final filename = 'test.csv';
 
-  // encode the list of objects as a JSON string
-  // String json = jsonEncode(
-  //   db.map((person) => person.toMap()).toList(),
-  // );
+// -------------------------------------------------- IN --------------------------------------------------
+  List<Customer> people = readJSON(filename);
+// ------------------------------------------------ ID getter ---------------------------------------------
 
-  // write the JSON string to a file
-  // File(filename).writeAsStringSync(json);
+  Set<int> idList = people.map((item) => item.id).toSet();
+  int lastID = idList.reduce((a, b) => a > b ? a : b);
+  print(lastID);
 
-  ////////
+// -------------------------------------------------- OUT --------------------------------------------------
+ writeJSON(filename, people);
 
-  // read the JSON string from the file
-  String jsonIN = File(filename).readAsStringSync();
+// -------------------------------------------------- cannot make external function with this usage --------------------------------------------------
 
-  // decode the JSON string into a list of maps
-  List<dynamic> data = jsonDecode(jsonIN);
 
-  // convert the list of maps to a list of objects
-  List<Customer> people = data.map((map) => Customer.fromMap(map)).toList();
-
-  // print the list of objects
-  people.add(Customer("Rory", 10000.12, 6, 6666));
-  print(people);
-
-  String jsonOUT = jsonEncode(
-    people.map((person) => person.toMap()).toList(),
-  );
-
-  File(filename).writeAsStringSync(jsonOUT);
-  print(jsonOUT);
 }
 
 class Customer{
@@ -70,31 +53,28 @@ class Customer{
   }
 }
 
-int lastID(db){
+dynamic lastID(db){
   Set<int> idList = db.map((item) => item.id).toSet();
   int lastID = idList.reduce((a, b) => a > b ? a : b);
   return lastID;
 }
 
 
-opener(path){
-  File file = File(path);
-  //whole content
-  String content = file.readAsStringSync();
-  // splitted content by new_line character
-  List<String> splitted = content.split("\n");
-  List<Customer> customers = [];
-  Set<int> idCollection = {};
+List<Customer> readJSON(filename){
+  String jsonIN = File(filename).readAsStringSync();
+  // List of strings
+  List<dynamic> data = jsonDecode(jsonIN);
 
+  // convert the list of maps to a list of objects
+  List<Customer> people = data.map((map) => Customer.fromMap(map)).toList();
 
-  for (String text in splitted){
-    String name = text.split(',')[0];
-    double amount = double.parse(text.split(',')[1]);
-    int id = int.parse(text.split(',')[2]);
-    int pass = int.parse(text.split(',')[3]);
+  return people;
+}
 
-    customers.add(Customer(name, amount, id, pass));
-  }
+void writeJSON(filename, people){
+  final String jsonOUT = jsonEncode(
+    people.map((person) => person.toMap()).toList(),
+  );
 
-  return customers;
+  File(filename).writeAsStringSync(jsonOUT);
 }

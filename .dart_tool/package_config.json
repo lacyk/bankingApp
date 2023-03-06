@@ -15,7 +15,7 @@
     },
     {
       "name": "args",
-      "rootUri": "file:///Users/vladislavlacko/.pub-cache/hosted/pub.dartlang.org/args-2.3.2",
+      "rootUri": "file:///Users/vladislavlacko/.pub-cache/hosted/pub.dartlang.org/args-2.4.0",
       "packageUri": "lib/",
       "languageVersion": "2.18"
     },
@@ -51,9 +51,9 @@
     },
     {
       "name": "coverage",
-      "rootUri": "file:///Users/vladislavlacko/.pub-cache/hosted/pub.dartlang.org/coverage-1.6.2",
+      "rootUri": "file:///Users/vladislavlacko/.pub-cache/hosted/pub.dartlang.org/coverage-1.6.3",
       "packageUri": "lib/",
-      "languageVersion": "2.15"
+      "languageVersion": "2.18"
     },
     {
       "name": "crypto",
@@ -117,9 +117,9 @@
     },
     {
       "name": "logging",
-      "rootUri": "file:///Users/vladislavlacko/.pub-cache/hosted/pub.dartlang.org/logging-1.1.0",
+      "rootUri": "file:///Users/vladislavlacko/.pub-cache/hosted/pub.dartlang.org/logging-1.1.1",
       "packageUri": "lib/",
-      "languageVersion": "2.12"
+      "languageVersion": "2.18"
     },
     {
       "name": "matcher",
@@ -147,7 +147,7 @@
     },
     {
       "name": "node_preamble",
-      "rootUri": "file:///Users/vladislavlacko/.pub-cache/hosted/pub.dartlang.org/node_preamble-2.0.1",
+      "rootUri": "file:///Users/vladislavlacko/.pub-cache/hosted/pub.dartlang.org/node_preamble-2.0.2",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -213,7 +213,7 @@
     },
     {
       "name": "source_maps",
-      "rootUri": "file:///Users/vladislavlacko/.pub-cache/hosted/pub.dartlang.org/source_maps-0.10.11",
+      "rootUri": "file:///Users/vladislavlacko/.pub-cache/hosted/pub.dartlang.org/source_maps-0.10.12",
       "packageUri": "lib/",
       "languageVersion": "2.18"
     },
@@ -225,7 +225,7 @@
     },
     {
       "name": "sqflite",
-      "rootUri": "file:///Users/vladislavlacko/.pub-cache/hosted/pub.dartlang.org/sqflite-2.2.4+1",
+      "rootUri": "file:///Users/vladislavlacko/.pub-cache/hosted/pub.dartlang.org/sqflite-2.2.5",
       "packageUri": "lib/",
       "languageVersion": "2.18"
     },
@@ -267,7 +267,7 @@
     },
     {
       "name": "test",
-      "rootUri": "file:///Users/vladislavlacko/.pub-cache/hosted/pub.dartlang.org/test-1.22.2",
+      "rootUri": "file:///Users/vladislavlacko/.pub-cache/hosted/pub.dartlang.org/test-1.23.1",
       "packageUri": "lib/",
       "languageVersion": "2.18"
     },
@@ -279,7 +279,7 @@
     },
     {
       "name": "test_core",
-      "rootUri": "file:///Users/vladislavlacko/.pub-cache/hosted/pub.dartlang.org/test_core-0.4.22",
+      "rootUri": "file:///Users/vladislavlacko/.pub-cache/hosted/pub.dartlang.org/test_core-0.4.24",
       "packageUri": "lib/",
       "languageVersion": "2.18"
     },
@@ -297,7 +297,7 @@
     },
     {
       "name": "vm_service",
-      "rootUri": "file:///Users/vladislavlacko/.pub-cache/hosted/pub.dartlang.org/vm_service-10.1.0",
+      "rootUri": "file:///Users/vladislavlacko/.pub-cache/hosted/pub.dartlang.org/vm_service-11.2.0",
       "packageUri": "lib/",
       "languageVersion": "2.15"
     },
@@ -332,7 +332,7 @@
       "languageVersion": "2.18"
     }
   ],
-  "generated": "2023-02-06T19:05:56.614418Z",
+  "generated": "2023-03-05T23:12:59.996111Z",
   "generator": "pub",
   "generatorVersion": "2.18.6"
 }
