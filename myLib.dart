@@ -23,7 +23,3 @@ logger(db) {
     }
   }
 }
-
-// void main(){
-//   logger();
-// }

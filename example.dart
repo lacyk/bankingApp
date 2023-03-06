@@ -2,6 +2,7 @@ import 'dart:io';
 import 'dart:async';
 import 'dart:convert';
 import './myLib.dart'; // importing logger();
+import 'customerClass.dart';
 
 main() async{
   final filename = 'test.csv';
@@ -14,46 +15,20 @@ main() async{
   int lastID = idList.reduce((a, b) => a > b ? a : b);
   print(lastID);
 
+  bool isLogged = logger(people);
+  print(isLogged);
+
 // -------------------------------------------------- OUT --------------------------------------------------
  writeJSON(filename, people);
 
 // -------------------------------------------------- cannot make external function with this usage --------------------------------------------------
 
 
+
 }
 
-class Customer{
-  String name;
-  double amount;
-  int id;
-  int pass;
 
-  Customer(this.name, this.amount, this.id, this.pass);
-
-  Map<String, dynamic> toMap() {
-    return {
-      'name':   name,
-      'amount': amount,
-      'id':     id,
-      'pass':   pass,
-    };
-  }
-
-  static Customer fromMap(Map<String, dynamic> map) {
-    return Customer(map['name'], map['amount'], map['id'], map['pass']);
-  }
-
-  @override
-  String toString(){
-    return "$name, $amount, $id";
-  }
-
-  void show(){
-    print('Name: $name, Amount: $amount, ID: $id, password: $pass');
-  }
-}
-
-dynamic lastID(db){
+int lastID(db){
   Set<int> idList = db.map((item) => item.id).toSet();
   int lastID = idList.reduce((a, b) => a > b ? a : b);
   return lastID;
